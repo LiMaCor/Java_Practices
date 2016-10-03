@@ -1,25 +1,29 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+// Programa que establece una calificación en función de la nota indicada.
+
 package ejercicio09;
 import java.util.Scanner;
 /**
  *
- * @author a021704062c
+ * @author PixelZer0
  */
 public class Ejercicio09 {
 
     public static void main(String[] args) {
         
+        // Declaramos "sc" para obtener datos por teclado.
+        // Declaramos también "nota".
         Scanner sc = new Scanner(System.in);
         int nota;
         
+        // Pedimos una nota.
         System.out.print("Introduce tu nota: ");
         
+        // Le asignamos un valor por teclado a "nota".
         nota = sc.nextInt();
         
+        // Si la nota es menor a cero y mayor a 10, queda descartada.
+        // De lo contrario, se compara con los casos en el bloque "switch" y
+        // se le asigna una calificación.
         if (nota < 0 || nota > 10) {
             System.out.println("Nota no válida. Introduce una nota correcta.");
         } else {

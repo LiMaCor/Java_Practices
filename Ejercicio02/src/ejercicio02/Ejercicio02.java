@@ -1,13 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+// Programa para calcular el área y volumen de un cilindro.
+
 package ejercicio02;
 import java.util.Scanner;
 /**
  *
- * @author a021704062c
+ * @author PixelZer0
  */
 public class Ejercicio02 {
 
@@ -18,11 +15,13 @@ public class Ejercicio02 {
         Scanner sc = new Scanner(System.in);
         final double PI = Math.PI;
         
+        // Pedimos el diámetro.
         System.out.print("Introduce el diámetro del cilindro: ");
         
         // Definimos la variable "diámetro".
         double diametro = sc.nextDouble();
         
+        // Pedimos la altura.
         System.out.print("Introduce la altura del cilindro: ");
         
         // Definimos la "altura" y calculamos el radio.
@@ -34,9 +33,8 @@ public class Ejercicio02 {
         double area = 2 * PI * radio * (altura + radio);
         double volumen = PI * Math.pow(radio, 2) * altura;
         
+        // Mostramos el resultado por pantalla.
         System.out.println("El área del cilindro es: " + area);
-        System.out.println("El volúmen del cilindro es: " + volumen);
-        
+        System.out.println("El volúmen del cilindro es: " + volumen);   
     }
-    
 }
