@@ -93,6 +93,7 @@ public class VentanaPrincipal extends JFrame implements ProbadorAparatos {
 
         jTabbedPaneHabitacion = new javax.swing.JTabbedPane();
         jPanelVistaGeneral = new javax.swing.JPanel();
+        jSliderRegulador = new javax.swing.JSlider();
         jButtonProbarAparatos = new javax.swing.JButton();
         jButtonSalir = new javax.swing.JButton();
         jButtonParar = new javax.swing.JButton();
@@ -111,7 +112,6 @@ public class VentanaPrincipal extends JFrame implements ProbadorAparatos {
         jToggelBluRay = new javax.swing.JToggleButton();
         jToggelTelevisor = new javax.swing.JToggleButton();
         jToggelPersianaSubir = new javax.swing.JToggleButton();
-        jSliderRegulador = new javax.swing.JSlider();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Habitación Inteligente");
@@ -126,6 +126,18 @@ public class VentanaPrincipal extends JFrame implements ProbadorAparatos {
 
         jPanelVistaGeneral.setBackground(new java.awt.Color(255, 255, 255));
         jPanelVistaGeneral.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jSliderRegulador.setMajorTickSpacing(1);
+        jSliderRegulador.setMaximum(3);
+        jSliderRegulador.setPaintLabels(true);
+        jSliderRegulador.setPaintTicks(true);
+        jSliderRegulador.setValue(0);
+        jSliderRegulador.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSliderReguladorStateChanged(evt);
+            }
+        });
+        jPanelVistaGeneral.add(jSliderRegulador, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 130, -1, -1));
 
         jButtonProbarAparatos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButtonProbarAparatos.setText("Probar Aparatos");
@@ -360,14 +372,6 @@ public class VentanaPrincipal extends JFrame implements ProbadorAparatos {
 
         jPanelVistaGeneral.add(jPanelControl, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 970, 60));
 
-        jSliderRegulador.setValue(0);
-        jSliderRegulador.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSliderReguladorStateChanged(evt);
-            }
-        });
-        jPanelVistaGeneral.add(jSliderRegulador, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 90, -1, -1));
-
         jTabbedPaneHabitacion.addTab("Vista general Salón Comedor", jPanelVistaGeneral);
 
         getContentPane().add(jTabbedPaneHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, 740));
@@ -564,8 +568,9 @@ public class VentanaPrincipal extends JFrame implements ProbadorAparatos {
        }
     }//GEN-LAST:event_jToggelLucesMesaActionPerformed
 
-    // Añadido un jSlider para mostrar las tres intensidades de la lampara
-    // del mueble.
+    /* Añadido un jSlider para mostrar las tres intensidades de la lampara
+    *  del mueble.
+    *  Valores del jSlider cambiados de 0 a 3. */
     private void jSliderReguladorStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderReguladorStateChanged
         int intensidad = jSliderRegulador.getValue();
         switch (intensidad) {
@@ -574,14 +579,14 @@ public class VentanaPrincipal extends JFrame implements ProbadorAparatos {
                 lamparaMueble2.apagar();
                 lamparaMueble3.apagar();
                 break;
-            case 25:
+            case 1:
                 lamparaMueble.encender();
                 break;
-            case 50:
+            case 2:
                 lamparaMueble.apagar();
                 lamparaMueble2.encender();
                 break;
-            case 75:
+            case 3:
                 lamparaMueble2.apagar();
                 lamparaMueble3.encender();
                 break;
@@ -676,11 +681,23 @@ public class VentanaPrincipal extends JFrame implements ProbadorAparatos {
             lampara.setHabitacion(habitacion);
             lampara.encender();
             
+            // Añadidas las intensidades al bucle "probarAparatos"
             switch (k) {
                 case 2:
                     lampara.apagar();
                     pausa(1000);
                     lampara.encender();
+                        if (lampara.isEncendida()) {
+                            lamparaMueble.encender();
+                            pausa(2000);
+                            lamparaMueble.apagar();
+                            lamparaMueble2.encender();
+                            pausa(2000);
+                            lamparaMueble2.apagar();
+                            lamparaMueble3.encender();
+                            pausa(2000);
+                            lamparaMueble3.apagar();
+                        }
                     persiana.bajar();
                     pausa(2000);
                     radiador.calentar();
@@ -709,7 +726,8 @@ public class VentanaPrincipal extends JFrame implements ProbadorAparatos {
      * Activa y desactiva los botones
      *
      * @param sn
-     */
+     *
+     * Añadido el activador/desactivador del jSlider **/
     private void botonesOnOff(boolean sn) {
         jToggelLucesEntrada.setEnabled(sn);
         jToggelLucesMesa.setEnabled(sn);
@@ -719,7 +737,7 @@ public class VentanaPrincipal extends JFrame implements ProbadorAparatos {
         jToggelLucesSofa.setEnabled(sn);
         jToggelMiniCadena.setEnabled(sn);
         jToggelBluRay.setEnabled(sn);
-
+        jSliderRegulador.setEnabled(sn);
         jToggelPersianaSubir.setEnabled(sn);
         jToggelTelevisor.setEnabled(sn);
         jToggelRadiador.setEnabled(sn);
