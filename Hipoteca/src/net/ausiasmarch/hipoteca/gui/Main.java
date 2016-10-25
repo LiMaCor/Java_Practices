@@ -71,7 +71,6 @@ public class Main extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cálculo Hipoteca Double");
-        setFocusable(false);
         setResizable(false);
 
         jLabel1.setText("Nombre:");
@@ -80,8 +79,11 @@ public class Main extends javax.swing.JFrame {
 
         jLabel6.setText("Diferencial:");
 
+        jTextFieldDiferencial.setNextFocusableComponent(jCheckBoxSeguroVida);
+
         jTextFieldInteresAnual.setEditable(false);
         jTextFieldInteresAnual.setBackground(new java.awt.Color(204, 204, 255));
+        jTextFieldInteresAnual.setFocusable(false);
 
         jLabel8.setText("Interes Anual");
 
@@ -100,6 +102,7 @@ public class Main extends javax.swing.JFrame {
 
         jTextFieldCuotaMensual.setEditable(false);
         jTextFieldCuotaMensual.setBackground(new java.awt.Color(204, 204, 255));
+        jTextFieldCuotaMensual.setFocusable(false);
 
         jCheckBoxFuncionario.setText("Funcionario");
 
@@ -108,6 +111,7 @@ public class Main extends javax.swing.JFrame {
         jCheckBoxTarjeta.setText("Tarjeta");
 
         jCheckBoxNomina.setText("Nómina");
+        jCheckBoxNomina.setNextFocusableComponent(jCheckBoxTarjeta);
 
         jCheckBoxPension.setText("Plan pensiones");
 
@@ -115,17 +119,25 @@ public class Main extends javax.swing.JFrame {
 
         jTextFieldDiferencialReal.setEditable(false);
         jTextFieldDiferencialReal.setBackground(new java.awt.Color(204, 204, 255));
+        jTextFieldDiferencialReal.setFocusable(false);
 
         jLabel12.setText("Años");
 
+        jTextFieldAnyos.setNextFocusableComponent(jTextFieldEuribor);
+
         jLabel5.setText("Edad");
 
+        jPanelErrores.setFocusable(false);
+
         jButtonCerrarListado.setText("Cerrar");
+        jButtonCerrarListado.setFocusable(false);
         jButtonCerrarListado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCerrarListadoActionPerformed(evt);
             }
         });
+
+        jScrollPane1.setFocusable(false);
 
         jTextAreaListaErrores.setEditable(false);
         jTextAreaListaErrores.setBackground(new java.awt.Color(255, 153, 102));
@@ -134,6 +146,7 @@ public class Main extends javax.swing.JFrame {
         jTextAreaListaErrores.setRows(5);
         jTextAreaListaErrores.setToolTipText("");
         jTextAreaListaErrores.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 153, 102)), "Se han encontrado los siguientes errores:"));
+        jTextAreaListaErrores.setFocusable(false);
         jTextAreaListaErrores.setName(""); // NOI18N
         jScrollPane1.setViewportView(jTextAreaListaErrores);
 
@@ -331,8 +344,15 @@ private void jButtonCalcularActionPerformed(java.awt.event.ActionEvent evt) {//G
     jTextFieldCuotaMensual.setText("");
     
     // Obtenemos y validamos los datos de entrada ...................
+    
     if (jTextFieldNombre.getText().isEmpty()) {
         sb.append("  - El nombre no puede quedar en blanco.\n");
+    }
+    
+    // El nombre debe tener un formato correcto
+    if (!jTextFieldNombre.getText().matches("(([a-zA-ZÁÉÍÓÚáéíóúñÑ]+)(-{1})?"
+            + "(((\\s|-)[a-zA-ZÁÉÍÓÚáéíóúñÑ]+)?)*)")) {
+        sb.append("  - El nombre no tiene un formato correcto.\n");
     }
 
     // Si ingresos mensuales no es un numero real valido
@@ -340,30 +360,65 @@ private void jButtonCalcularActionPerformed(java.awt.event.ActionEvent evt) {//G
         sb.append("  - Ingresos no validos.\n");
     } 
 
+    /* Los ingresos solo pueden ser números y empezar a partir de 1
+    *if (!jTextFieldIngresosMes.getText().matches("^([1-9])+([0-9])*")) {
+        sb.append("  - Solo se admiten números. Los ingresos no deben comenzar"
+                + " por 0.\n");
+    }*/
+    
     // Si edad no es un numero entero (int) valido 
     if (!Convert.isValidInt(jTextFieldEdad.getText())) {
         sb.append("  - Edad no valida.\n");
     } 
 
+    /* La edad solo puede ser numérica y no empezar por 0
+    if (!jTextFieldEdad.getText().matches("^([1-9])+([0-9])*")) {
+        sb.append("  - Solo se admiten números. La edad no puede comenzar"
+                + " por 0.\n");
+    }*/
+    
     // Si el importe de prestamo no es un número (int) válido
     if (!Convert.isValidInt(jTextFieldImportePrestamo.getText())) {
         sb.append("  - Importe no válido.\n");
     }
+    
+    /* El importe del préstamo solo puede ser númerico y no comenzar por 0
+    if (!jTextFieldImportePrestamo.getText().matches("^([1-9])+([0-9])*")) {
+        sb.append("  - Solo se admiten números. El importe no debe comenzar"
+                + " por 0.\n");
+    }*/
     
     // Si los años de hipoteca no es un número (int) válido
     if (!Convert.isValidInt(jTextFieldAnyos.getText())) {
         sb.append("  - Años de hipoteca no válidos.\n");
     }
     
+    /* Los años deben ser números y no deben empezar por 0
+    if (!jTextFieldAnyos.getText().matches("^([1-9])+([0-9])*")) {
+        sb.append("  - Solo se admiten números. Los años no pueden comenzar"
+                + " por 0.\n");
+    }*/
+    
     // Si el euribor no es un número (double) válido
     if (!Convert.isValidDouble(jTextFieldEuribor.getText())) {
         sb.append("  - Euribor no válido.\n");
     }
     
+    /* El euribor debe numérico
+    if (!jTextFieldEuribor.getText().matches("^[0-9]+(,[0-9])*")) {
+        sb.append("  - En el Euribor solo se admiten números y una coma decimal.\n");
+    }*/
+    
     // Si el diferencial no es un número (double) válido
     if (!Convert.isValidDouble(jTextFieldDiferencial.getText())) {
         sb.append("  - Diferencial no válido.\n");
     }
+    
+    /* El diferencial debe ser numérico
+    if (!jTextFieldDiferencial.getText().matches("^[0-9]+(,[0-9])*")) {
+        sb.append("  - En el Diferencial solo se admiten"
+                + " números y una coma decimal.\n");
+    }*/
     
     // Si hay errores de entrada (sintacticos) .................
     if (sb.length() > 0) {
