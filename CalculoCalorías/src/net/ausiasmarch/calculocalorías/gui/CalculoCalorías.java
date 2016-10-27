@@ -4,24 +4,32 @@
  * and open the template in the editor.
  */
 package net.ausiasmarch.calculocalorías.gui;
+import net.ausiasmarch.calculocalorías.modelo.*;
+import net.ausiasmarch.common.Convert;
 
 /**
  *
- * @author a021704062c
+ * @author Julián_Martinez
  */
 public class CalculoCalorías extends javax.swing.JFrame {
-
-    /**
-     * Creates new form CalculoCalorías
-     */
+    
+    private final MetabolismoBasal metabolismoBasal;
+    
     public CalculoCalorías() {
         initComponents();
         
+        metabolismoBasal = new MetabolismoBasal();
         
-        setSize(619, 425);
+        iniciar();
+        
         jPanelListaErrores.setVisible(false);
     }
 
+    private void iniciar(){
+        setSize(619, 425);
+        setLocationRelativeTo(null);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,12 +51,12 @@ public class CalculoCalorías extends javax.swing.JFrame {
         jComboBoxActividad = new javax.swing.JComboBox<>();
         jButtonCalcular = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jTextFieldMetabolismoBasal = new javax.swing.JTextField();
+        jTextFieldTasaMBasal = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextFieldMantenerPeso = new javax.swing.JTextField();
+        jTextFieldCalorias = new javax.swing.JTextField();
         jPanelListaErrores = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextFieldErrores = new javax.swing.JTextField();
+        jTextAreaListaErrores = new javax.swing.JTextArea();
         jButtonCerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -60,11 +68,6 @@ public class CalculoCalorías extends javax.swing.JFrame {
         jLabel1.setText("Género:");
 
         jComboBoxGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hombre", "Mujer" }));
-        jComboBoxGenero.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxGeneroActionPerformed(evt);
-            }
-        });
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel2.setText("Peso (en kg) :");
@@ -90,45 +93,55 @@ public class CalculoCalorías extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         jLabel6.setText("Metabolismo Basal");
 
-        jTextFieldMetabolismoBasal.setEditable(false);
-        jTextFieldMetabolismoBasal.setBackground(new java.awt.Color(51, 102, 255));
-        jTextFieldMetabolismoBasal.setForeground(new java.awt.Color(0, 0, 0));
+        jTextFieldTasaMBasal.setEditable(false);
+        jTextFieldTasaMBasal.setBackground(new java.awt.Color(51, 102, 255));
+        jTextFieldTasaMBasal.setForeground(new java.awt.Color(0, 0, 0));
+        jTextFieldTasaMBasal.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         jLabel7.setText("Calorías para mantener el peso");
 
-        jTextFieldMantenerPeso.setEditable(false);
-        jTextFieldMantenerPeso.setBackground(new java.awt.Color(51, 102, 255));
-        jTextFieldMantenerPeso.setForeground(new java.awt.Color(0, 0, 0));
+        jTextFieldCalorias.setEditable(false);
+        jTextFieldCalorias.setBackground(new java.awt.Color(51, 102, 255));
+        jTextFieldCalorias.setForeground(new java.awt.Color(0, 0, 0));
+        jTextFieldCalorias.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jPanelListaErrores.setName(""); // NOI18N
 
-        jTextFieldErrores.setEditable(false);
-        jTextFieldErrores.setBackground(new java.awt.Color(255, 60, 44));
-        jTextFieldErrores.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 60, 44)), "Se han encontrado los siguientes errores:"));
-        jScrollPane1.setViewportView(jTextFieldErrores);
+        jTextAreaListaErrores.setEditable(false);
+        jTextAreaListaErrores.setBackground(new java.awt.Color(255, 102, 51));
+        jTextAreaListaErrores.setColumns(20);
+        jTextAreaListaErrores.setLineWrap(true);
+        jTextAreaListaErrores.setRows(5);
+        jTextAreaListaErrores.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 102, 51)), "Se han encontrado los siguientes errores:"));
+        jScrollPane1.setViewportView(jTextAreaListaErrores);
 
         jButtonCerrar.setText("Cerrar");
+        jButtonCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCerrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelListaErroresLayout = new javax.swing.GroupLayout(jPanelListaErrores);
         jPanelListaErrores.setLayout(jPanelListaErroresLayout);
         jPanelListaErroresLayout.setHorizontalGroup(
             jPanelListaErroresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelListaErroresLayout.createSequentialGroup()
-                .addGroup(jPanelListaErroresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelListaErroresLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonCerrar)))
-                .addContainerGap())
+                .addContainerGap()
+                .addComponent(jScrollPane1))
+            .addGroup(jPanelListaErroresLayout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addComponent(jButtonCerrar)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanelListaErroresLayout.setVerticalGroup(
             jPanelListaErroresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelListaErroresLayout.createSequentialGroup()
-                .addGap(0, 18, Short.MAX_VALUE)
                 .addComponent(jButtonCerrar)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -166,9 +179,9 @@ public class CalculoCalorías extends javax.swing.JFrame {
                                         .addComponent(jLabel7)
                                         .addGap(14, 14, 14)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jTextFieldMantenerPeso)
-                                    .addComponent(jTextFieldMetabolismoBasal, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 51, Short.MAX_VALUE))
+                                    .addComponent(jTextFieldCalorias)
+                                    .addComponent(jTextFieldTasaMBasal, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 47, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanelListaErrores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -202,15 +215,15 @@ public class CalculoCalorías extends javax.swing.JFrame {
                         .addGap(55, 55, 55)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jTextFieldMetabolismoBasal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldTasaMBasal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(jTextFieldMantenerPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTextFieldCalorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(72, 72, 72)
                         .addComponent(jButtonCalcular)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addComponent(jPanelListaErrores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -218,13 +231,104 @@ public class CalculoCalorías extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBoxGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxGeneroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxGeneroActionPerformed
-
     private void jButtonCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalcularActionPerformed
-        // TODO add your handling code here:
+        
+        // Declaramos la variables de entrada
+        double peso;
+        int altura;
+        int edad;
+        
+        // Declaramos las variables de salida provenientes de "MetabolismoBasal"
+        double tmb;     // tmb = Tasa de metabolismo basal
+        double calorias;
+        
+        // Declaramos el contenedor de strings con los errores de salida
+        StringBuilder sb = new StringBuilder();
+        
+        // Limpiamos la salida de los resultados
+        jTextFieldTasaMBasal.setText("");
+        jTextFieldCalorias.setText("");
+        
+        // Obtenemos y validamos los datos de entrada
+        
+        if (jTextFieldPeso.getText().isEmpty()) {
+            sb.append("  - El peso no puede quedar en blanco.\n");
+        }
+        
+        // Si el peso no es un número válido
+        if (!Convert.isValidDouble(jTextFieldPeso.getText())) {
+            sb.append("  - Peso no válido.\n");
+        }
+        
+        if (jTextFieldAltura.getText().isEmpty()) {
+            sb.append("  - La altura no puede quedar en blanco.\n");
+        }
+        
+        // Si la altura no es un número válido
+        if (!Convert.isValidInt(jTextFieldAltura.getText())) {
+            sb.append("  - Altura no válida.\n");
+        }
+        
+        if (jTextFieldEdad.getText().isEmpty()) {
+            sb.append("  - La edad no puede quedar en blanco.\n");
+        }
+        
+        // Si la edad no es un número válido
+        if (!Convert.isValidInt(jTextFieldEdad.getText())) {
+            sb.append("  - Edad no válida.\n");
+        }
+        
+        if (sb.length() > 0) {
+            setSize(630, 640);
+            jPanelListaErrores.setVisible(true);
+            jTextAreaListaErrores.setText("");
+            jTextAreaListaErrores.append(sb.toString());
+            jTextAreaListaErrores.setCaretPosition(0);
+            return;
+        }
+        
+        // Hacemos las conversiones de datos numéricos
+        peso = Convert.parseDouble(jTextFieldPeso.getText());
+        altura = Convert.parseInt(jTextFieldAltura.getText());
+        edad = Convert.parseInt(jTextFieldEdad.getText());
+        
+        // Pasamos los datos de entrada a MetabolismoBasal
+        metabolismoBasal.setPeso(peso);
+        metabolismoBasal.setAltura(altura);
+        metabolismoBasal.setEdad(edad);
+        
+        // Pasamos las opciones elegidas en los desplegables a MetabolismoBasal
+        metabolismoBasal.setGenero(jComboBoxGenero.getSelectedItem().toString());
+        metabolismoBasal.setActividad(jComboBoxActividad
+                .getSelectedItem().toString());
+        
+        // Comprobamos si los datos para el cálculo son correctos
+        if (metabolismoBasal.validate() == false) {
+            sb.append(metabolismoBasal.getMensaje());
+            setSize(630, 640);
+            jPanelListaErrores.setVisible(true);
+            jTextAreaListaErrores.setText("");
+            jTextAreaListaErrores.append(sb.toString());
+            jTextAreaListaErrores.setCaretPosition(0);
+            return;
+        }
+        
+        // En este punto, todo está correcto.
+        // Procedemos a mostrar los cálculos
+        
+        // Obtenemos los cálculos de "MetabolismoBasal"
+        tmb = metabolismoBasal.getMetabolismoBasal();
+        calorias = metabolismoBasal.getCaloriasMantenerPeso();
+        
+        // Mostramos el resultado con el formato correcto
+        jTextFieldTasaMBasal.setText(Convert.format(tmb, 2));
+        jTextFieldCalorias.setText(Convert.format(calorias, 2));
     }//GEN-LAST:event_jButtonCalcularActionPerformed
+
+    private void jButtonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarActionPerformed
+        setSize(619, 425);
+        jPanelListaErrores.setVisible(false);
+    }//GEN-LAST:event_jButtonCerrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -275,11 +379,11 @@ public class CalculoCalorías extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanelListaErrores;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextAreaListaErrores;
     private javax.swing.JTextField jTextFieldAltura;
+    private javax.swing.JTextField jTextFieldCalorias;
     private javax.swing.JTextField jTextFieldEdad;
-    private javax.swing.JTextField jTextFieldErrores;
-    private javax.swing.JTextField jTextFieldMantenerPeso;
-    private javax.swing.JTextField jTextFieldMetabolismoBasal;
     private javax.swing.JTextField jTextFieldPeso;
+    private javax.swing.JTextField jTextFieldTasaMBasal;
     // End of variables declaration//GEN-END:variables
 }

@@ -65,12 +65,12 @@
                                   </Group>
                               </Group>
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="jTextFieldMantenerPeso" max="32767" attributes="0"/>
-                                  <Component id="jTextFieldMetabolismoBasal" min="-2" pref="99" max="-2" attributes="0"/>
+                                  <Component id="jTextFieldCalorias" max="32767" attributes="0"/>
+                                  <Component id="jTextFieldTasaMBasal" min="-2" pref="99" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="51" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="47" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
@@ -114,12 +114,12 @@
                       <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldMetabolismoBasal" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldTasaMBasal" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldMantenerPeso" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldCalorias" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -127,7 +127,7 @@
                       <Component id="jButtonCalcular" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="32" max="32767" attributes="0"/>
+              <EmptySpace pref="64" max="32767" attributes="0"/>
               <Component id="jPanelListaErrores" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -152,9 +152,6 @@
           </StringArray>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxGeneroActionPerformed"/>
-      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
@@ -229,7 +226,7 @@
         <Property name="text" type="java.lang.String" value="Metabolismo Basal"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldMetabolismoBasal">
+    <Component class="javax.swing.JTextField" name="jTextFieldTasaMBasal">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -238,6 +235,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="0" red="0" type="rgb"/>
         </Property>
+        <Property name="horizontalAlignment" type="int" value="4"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
@@ -248,7 +246,7 @@
         <Property name="text" type="java.lang.String" value="Calor&#xed;as para mantener el peso"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldMantenerPeso">
+    <Component class="javax.swing.JTextField" name="jTextFieldCalorias">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -257,6 +255,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="0" red="0" type="rgb"/>
         </Property>
+        <Property name="horizontalAlignment" type="int" value="4"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanelListaErrores">
@@ -267,25 +266,24 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="jButtonCerrar" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                  <Component id="jButtonCerrar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="0" pref="18" max="32767" attributes="0"/>
                   <Component id="jButtonCerrar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" pref="205" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="174" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -295,18 +293,21 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTextField" name="jTextFieldErrores">
+            <Component class="javax.swing.JTextArea" name="jTextAreaListaErrores">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="2c" green="3c" red="ff" type="rgb"/>
+                  <Color blue="33" green="66" red="ff" type="rgb"/>
                 </Property>
+                <Property name="columns" type="int" value="20"/>
+                <Property name="lineWrap" type="boolean" value="true"/>
+                <Property name="rows" type="int" value="5"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                     <TitledBorder title="Se han encontrado los siguientes errores:">
                       <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                         <LineBorder>
-                          <Color PropertyName="color" blue="2c" green="3c" red="ff" type="rgb"/>
+                          <Color PropertyName="color" blue="33" green="66" red="ff" type="rgb"/>
                         </LineBorder>
                       </Border>
                     </TitledBorder>
@@ -320,6 +321,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Cerrar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCerrarActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
