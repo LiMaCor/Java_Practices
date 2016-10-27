@@ -7,7 +7,7 @@ package IES;
 
 /**
  *
- * @author Julián
+ * @author PixelZer0
  */
 public class Profesor {
     

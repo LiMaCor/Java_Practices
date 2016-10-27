@@ -7,7 +7,7 @@ package Gestion;
 import IES.*;
 /**
  *
- * @author a021704062c
+ * @author PixelZer0
  */
 public class Gestion {
 
