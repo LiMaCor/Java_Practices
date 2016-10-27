@@ -2,7 +2,7 @@ package net.ausiasmarch.hipoteca.modelo;
 
 /**
  * Calcular una hipoteca
- * @author Julián_Martínez
+ * @author PixelZer0
  */
 
 public class Hipoteca {

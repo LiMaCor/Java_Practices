@@ -12,7 +12,7 @@ import net.ausiasmarch.hipoteca.modelo.*;
 
 /**
  *
- * @author Julián_Martínez
+ * @author PixelZer0
  */
 public class Main extends javax.swing.JFrame {
 

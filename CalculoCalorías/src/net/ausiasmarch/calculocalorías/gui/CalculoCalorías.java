@@ -9,7 +9,7 @@ import net.ausiasmarch.common.Convert;
 
 /**
  *
- * @author Julián_Martinez
+ * @author PixelZer0
  */
 public class CalculoCalorías extends javax.swing.JFrame {
     
@@ -323,6 +323,11 @@ public class CalculoCalorías extends javax.swing.JFrame {
         // Mostramos el resultado con el formato correcto
         jTextFieldTasaMBasal.setText(Convert.format(tmb, 2));
         jTextFieldCalorias.setText(Convert.format(calorias, 2));
+        
+        // Limpiamos la salida de errores y cerramos la misma
+        setSize(619, 425);
+        jPanelListaErrores.setVisible(false);
+        jTextAreaListaErrores.setText("");
     }//GEN-LAST:event_jButtonCalcularActionPerformed
 
     private void jButtonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarActionPerformed
