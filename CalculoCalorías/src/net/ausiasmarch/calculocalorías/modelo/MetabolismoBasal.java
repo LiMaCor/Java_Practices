@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.ausiasmarch.calculocalorías.modelo;
 
 /**
  *
- * @author PixelZer0
+ * @author Julián_Martinez
  */
 public class MetabolismoBasal {
     
@@ -19,62 +14,114 @@ public class MetabolismoBasal {
     
     // Métodos (get) y (set)
 
+    /**
+     * Obtiene el género
+     * @return String
+     */
     public String getGenero() {
         return genero;
     }
 
+    /**
+     * Establece el género
+     * @param genero 
+     */
     public void setGenero(String genero) {
         this.genero = genero;
     }
 
+    /**
+     * Obtiene la actividad
+     * @return String
+     */
     public String getActividad() {
         return actividad;
     }
 
+    /**
+     * Establece la actividad
+     * @param actividad 
+     */
     public void setActividad(String actividad) {
         this.actividad = actividad;
     }
 
+    /**
+     * Obtiene la altura
+     * @return int
+     */
     public int getAltura() {
         return altura;
     }
 
+    /**
+     * Establece la altura
+     * @param altura 
+     */
     public void setAltura(int altura) {
         this.altura = altura;
     }
 
+    /**
+     * Obtiene la edad
+     * @return int
+     */
     public int getEdad() {
         return edad;
     }
 
+    /**
+     * Establece la edad
+     * @param edad 
+     */
     public void setEdad(int edad) {
         this.edad = edad;
     }
 
+    /**
+     * Obtiene el peso
+     * @return double
+     */
     public double getPeso() {
         return peso;
     }
 
+    /**
+     * Establece el peso
+     * @param peso 
+     */
     public void setPeso(double peso) {
         this.peso = peso;
     }
 
+    /**
+     * Obtiene los mensajes de error
+     * @return String
+     */
     public String getMensaje() {
         return mensaje;
     }
 
+    /**
+     * Establece los mensajes de error
+     * @param mensaje 
+     */
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
     }
     
-    /* Metodos funcionales (reglas de validación y cálculos)
+    /** Metodos funcionales (reglas de validación y cálculos)
      *
      * Reglas de validación:
      * 1 - El peso debe ser mayor que 0.
      * 2 - La altura debe ser mayor que 0.
      * 3 - La edad debe ser mayor que 0.
-    */
+     */ 
     
+    /**
+     * Comprueba que los datos para realizar los cálculos, son correctos.
+     * @return boolean
+     */
     public boolean validate() {
         sb = new StringBuilder();
         
@@ -103,35 +150,48 @@ public class MetabolismoBasal {
     
     // Cálculos
     
-    // Obtiene el cálculo del metabolismo basal
+    /**
+     * Obtiene el cálculo del metabolismo basal
+     * @return double
+     */
     public double getMetabolismoBasal() {
-        double tmb = 0;
+        double tmb = (10 * peso) + (6.25 * altura) - (5 * edad);
         
         switch (genero.toUpperCase()) {
             case "HOMBRE":
-                tmb = (10 * peso) + (6.25 * altura) - (5 * edad) + 5;
+                tmb = tmb + 5;
             case "MUJER":
-                tmb = (10 * peso) + (6.25 * altura) - (5 * edad) - 161;
+                tmb = tmb - 161;
         }
         
         return tmb;
     }
     
-    // Obtiene el cálculo de las calorías necesarias para mantener el peso actual
+    /**
+     * Obtiene el cálculo de las calorías necesarias para mantener el peso actual
+     * @return double
+     */
     public double getCaloriasMantenerPeso() {
         double calorias = 0;
-                
-        switch(actividad.toUpperCase()) {
-            case "SEDENTARIA":
-                calorias = getMetabolismoBasal() * 1.2;
-            case "LIGERA":
-                calorias = getMetabolismoBasal() * 1.375;
-            case "MODERADA":
-                calorias = getMetabolismoBasal() * 1.55;
-            case "INTENSA":
-                calorias = getMetabolismoBasal() * 1.725;
-            case "MUY INTENSA":
-                calorias = getMetabolismoBasal() * 1.9;
+        
+        if (actividad.equals(TipoActividad.SEDENTARIA.toString())) {
+            calorias = getMetabolismoBasal() * TipoActividad.SEDENTARIA.valor;
+        }
+        
+        if (actividad.equals(TipoActividad.LIGERA.toString())) {
+            calorias = getMetabolismoBasal() * TipoActividad.LIGERA.valor;
+        }
+        
+        if (actividad.equals(TipoActividad.MODERADA.toString())) {
+            calorias = getMetabolismoBasal() * TipoActividad.MODERADA.valor;
+        }
+        
+        if (actividad.equals(TipoActividad.INTENSA.toString())) {
+            calorias = getMetabolismoBasal() * TipoActividad.INTENSA.valor;
+        }
+        
+        if (actividad.equals(TipoActividad.MUY_INTENSA.toString())) {
+            calorias = getMetabolismoBasal() * TipoActividad.MUY_INTENSA.valor;
         }
         
         return calorias;

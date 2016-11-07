@@ -42,12 +42,14 @@
                                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jComboBoxGenero" max="32767" attributes="0"/>
-                                  <Component id="jTextFieldPeso" max="32767" attributes="0"/>
-                                  <Component id="jTextFieldAltura" max="32767" attributes="0"/>
-                                  <Component id="jTextFieldEdad" min="-2" pref="40" max="-2" attributes="0"/>
-                                  <Component id="jComboBoxActividad" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jComboBoxGenero" max="32767" attributes="0"/>
+                                      <Component id="jTextFieldPeso" max="32767" attributes="0"/>
+                                      <Component id="jTextFieldAltura" max="32767" attributes="0"/>
+                                      <Component id="jTextFieldEdad" min="-2" pref="40" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jComboBoxActividad" min="-2" pref="114" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -197,13 +199,7 @@
     <Component class="javax.swing.JComboBox" name="jComboBoxActividad">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="5">
-            <StringItem index="0" value="Sedentaria"/>
-            <StringItem index="1" value="Ligera"/>
-            <StringItem index="2" value="Moderada"/>
-            <StringItem index="3" value="Intensa"/>
-            <StringItem index="4" value="Muy intensa"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
       <AuxValues>

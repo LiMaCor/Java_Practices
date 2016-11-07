@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.ausiasmarch.calculocalorías.gui;
 import net.ausiasmarch.calculocalorías.modelo.*;
 import net.ausiasmarch.common.Convert;
 
 /**
  *
- * @author PixelZer0
+ * @author Julián_Martinez
  */
 public class CalculoCalorías extends javax.swing.JFrame {
     
@@ -19,6 +14,12 @@ public class CalculoCalorías extends javax.swing.JFrame {
         initComponents();
         
         metabolismoBasal = new MetabolismoBasal();
+        
+        jComboBoxActividad.addItem(TipoActividad.SEDENTARIA.toString());
+        jComboBoxActividad.addItem(TipoActividad.LIGERA.toString());
+        jComboBoxActividad.addItem(TipoActividad.MODERADA.toString());
+        jComboBoxActividad.addItem(TipoActividad.INTENSA.toString());
+        jComboBoxActividad.addItem(TipoActividad.MUY_INTENSA.toString());
         
         iniciar();
         
@@ -80,8 +81,6 @@ public class CalculoCalorías extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel5.setText("Actividad:");
-
-        jComboBoxActividad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sedentaria", "Ligera", "Moderada", "Intensa", "Muy intensa" }));
 
         jButtonCalcular.setText("Calcular");
         jButtonCalcular.addActionListener(new java.awt.event.ActionListener() {
@@ -161,12 +160,13 @@ public class CalculoCalorías extends javax.swing.JFrame {
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jComboBoxGenero, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextFieldPeso)
-                                    .addComponent(jTextFieldAltura)
-                                    .addComponent(jTextFieldEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBoxActividad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jComboBoxGenero, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jTextFieldPeso)
+                                        .addComponent(jTextFieldAltura)
+                                        .addComponent(jTextFieldEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jComboBoxActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(46, 46, 46)
                                 .addComponent(jButtonCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -251,26 +251,14 @@ public class CalculoCalorías extends javax.swing.JFrame {
         
         // Obtenemos y validamos los datos de entrada
         
-        if (jTextFieldPeso.getText().isEmpty()) {
-            sb.append("  - El peso no puede quedar en blanco.\n");
-        }
-        
         // Si el peso no es un número válido
         if (!Convert.isValidDouble(jTextFieldPeso.getText())) {
             sb.append("  - Peso no válido.\n");
         }
         
-        if (jTextFieldAltura.getText().isEmpty()) {
-            sb.append("  - La altura no puede quedar en blanco.\n");
-        }
-        
         // Si la altura no es un número válido
         if (!Convert.isValidInt(jTextFieldAltura.getText())) {
             sb.append("  - Altura no válida.\n");
-        }
-        
-        if (jTextFieldEdad.getText().isEmpty()) {
-            sb.append("  - La edad no puede quedar en blanco.\n");
         }
         
         // Si la edad no es un número válido
@@ -313,6 +301,7 @@ public class CalculoCalorías extends javax.swing.JFrame {
             return;
         }
         
+        
         // En este punto, todo está correcto.
         // Procedemos a mostrar los cálculos
         
@@ -324,10 +313,10 @@ public class CalculoCalorías extends javax.swing.JFrame {
         jTextFieldTasaMBasal.setText(Convert.format(tmb, 2));
         jTextFieldCalorias.setText(Convert.format(calorias, 2));
         
-        // Limpiamos la salida de errores y cerramos la misma
+        // Limpiamos el listado de errores y lo ocultamos
         setSize(619, 425);
-        jPanelListaErrores.setVisible(false);
         jTextAreaListaErrores.setText("");
+        jPanelListaErrores.setVisible(false);
     }//GEN-LAST:event_jButtonCalcularActionPerformed
 
     private void jButtonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarActionPerformed
