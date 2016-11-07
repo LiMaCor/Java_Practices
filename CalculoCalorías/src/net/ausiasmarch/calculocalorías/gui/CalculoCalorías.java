@@ -4,7 +4,7 @@ import net.ausiasmarch.common.Convert;
 
 /**
  *
- * @author Julián_Martinez
+ * @author Pixel_Zer0
  */
 public class CalculoCalorías extends javax.swing.JFrame {
     

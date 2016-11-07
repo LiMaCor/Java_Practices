@@ -2,7 +2,7 @@ package net.ausiasmarch.calculocalorías.modelo;
 
 /**
  *
- * @author Julián_Martinez
+ * @author Pixel_Zer0
  */
 public class MetabolismoBasal {
     

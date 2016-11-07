@@ -2,7 +2,7 @@ package net.ausiasmarch.calculocalorías.modelo;
 
 /**
  *
- * @author Julian_Martinez
+ * @author Pixel_Zer0
  */
 public enum TipoActividad {
     SEDENTARIA(1.2),
