@@ -2,7 +2,7 @@ package net.ausiasmarch.calculocalorías.modelo;
 
 /**
  *
- * @author Pixel_Zer0
+ * @author Julián_Martinez
  */
 public enum TipoActividad {
     SEDENTARIA(1.2),
@@ -17,12 +17,13 @@ public enum TipoActividad {
         this.valor = valor;
     }
 
+    public double getValor() {
+        return valor;
+    }
     
     @Override
     public String toString() {
-        
         String tipo = "";
-        
         switch (this) {
             case SEDENTARIA:
                 tipo = "Sedentaria";

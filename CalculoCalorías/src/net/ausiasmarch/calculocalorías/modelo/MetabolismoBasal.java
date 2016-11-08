@@ -2,7 +2,7 @@ package net.ausiasmarch.calculocalorías.modelo;
 
 /**
  *
- * @author Pixel_Zer0
+ * @author Julián_Martinez
  */
 public class MetabolismoBasal {
     
@@ -175,23 +175,26 @@ public class MetabolismoBasal {
         double calorias = 0;
         
         if (actividad.equals(TipoActividad.SEDENTARIA.toString())) {
-            calorias = getMetabolismoBasal() * TipoActividad.SEDENTARIA.valor;
+            calorias = getMetabolismoBasal() * 
+                    TipoActividad.SEDENTARIA.getValor();
         }
         
         if (actividad.equals(TipoActividad.LIGERA.toString())) {
-            calorias = getMetabolismoBasal() * TipoActividad.LIGERA.valor;
+            calorias = getMetabolismoBasal() * TipoActividad.LIGERA.getValor();
         }
         
         if (actividad.equals(TipoActividad.MODERADA.toString())) {
-            calorias = getMetabolismoBasal() * TipoActividad.MODERADA.valor;
+            calorias = getMetabolismoBasal() * 
+                    TipoActividad.MODERADA.getValor();
         }
         
         if (actividad.equals(TipoActividad.INTENSA.toString())) {
-            calorias = getMetabolismoBasal() * TipoActividad.INTENSA.valor;
+            calorias = getMetabolismoBasal() * TipoActividad.INTENSA.getValor();
         }
         
         if (actividad.equals(TipoActividad.MUY_INTENSA.toString())) {
-            calorias = getMetabolismoBasal() * TipoActividad.MUY_INTENSA.valor;
+            calorias = getMetabolismoBasal() * 
+                    TipoActividad.MUY_INTENSA.getValor();
         }
         
         return calorias;

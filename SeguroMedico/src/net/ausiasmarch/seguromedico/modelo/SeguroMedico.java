@@ -144,7 +144,7 @@ public class SeguroMedico {
         sb = new StringBuilder();
         
         // La edad debe ser mayor o igual a 18 años
-        if (edad <= 18) {
+        if (edad < 18) {
             sb.append("  - La edad no debe ser inferior a 18 años.\n");
         }
         
@@ -155,30 +155,30 @@ public class SeguroMedico {
         
         // Si marca "Embarazada" o cobertura de fecundación "in vitro", el sexo
         // debe ser mujer
-        if (getGenero() != "Mujer" && (isEmbarazada() || isCoberturaInVitro())) {
+        if (coberturaInVitro || embarazada) {
+            if (!genero.equalsIgnoreCase("Mujer")) {
                 sb.append("  - El sexo debe ser 'Mujer'.\n");
+            }
         }
-        
         // Si marca la cobertura "Pediatría", el núm. de hijos debe ser mayor
         // que cero
-        if (isCoberturaPediatria()) {
-            if (numHijos < 0) {
+        if (coberturaPediatria) {
+            if (numHijos <= 0) {
                 sb.append("  - El núm. de hijos debe ser mayor que cero.\n");
             }
         }
         
         // Si marca la cobertura "Dermatológica", debe marcar la enfermedad
         // "Piel"
-        if (isCoberturaDermatologia()) {
-            if (!isEnfermedadPiel()) {
+        if (coberturaDermatologia) {
+            if (!enfermedadPiel)
                 sb.append("  - Debe marcar como enfermedad la opción 'Piel'.\n");
             }
-        }
         
         // Si marca la cobertura "Corazón", debe marcar la enfermedad
         // "Corazón"
-        if (isCoberturaCorazon()) {
-            if (!isEnfermedadCorazon()) {
+        if (coberturaCorazon) {
+            if (!enfermedadCorazon) {
                 sb.append("  - Debe marcar como enfermedad la opción"
                         + " 'Corazón'.\n");
             }
@@ -186,8 +186,8 @@ public class SeguroMedico {
         
         // Si marca la cobertura "Oftalmología", debe marcar la enfermedad
         // "Ojos"
-        if (isCoberturaOftalmologica()) {
-            if (!isEnfermedadOjos()) {
+        if (coberturaOftalmologica) {
+            if (!enfermedadOjos) {
                 sb.append("  - Debe marcar como enfermedad la opción 'Ojos'.\n");
             }
         }

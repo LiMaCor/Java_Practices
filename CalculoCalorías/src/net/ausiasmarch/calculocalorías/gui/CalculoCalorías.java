@@ -4,7 +4,7 @@ import net.ausiasmarch.common.Convert;
 
 /**
  *
- * @author Pixel_Zer0
+ * @author Julián_Martinez
  */
 public class CalculoCalorías extends javax.swing.JFrame {
     
@@ -94,7 +94,7 @@ public class CalculoCalorías extends javax.swing.JFrame {
 
         jTextFieldTasaMBasal.setEditable(false);
         jTextFieldTasaMBasal.setBackground(new java.awt.Color(51, 102, 255));
-        jTextFieldTasaMBasal.setForeground(new java.awt.Color(0, 0, 0));
+        jTextFieldTasaMBasal.setForeground(new java.awt.Color(255, 255, 255));
         jTextFieldTasaMBasal.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
@@ -102,7 +102,7 @@ public class CalculoCalorías extends javax.swing.JFrame {
 
         jTextFieldCalorias.setEditable(false);
         jTextFieldCalorias.setBackground(new java.awt.Color(51, 102, 255));
-        jTextFieldCalorias.setForeground(new java.awt.Color(0, 0, 0));
+        jTextFieldCalorias.setForeground(new java.awt.Color(255, 255, 255));
         jTextFieldCalorias.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jPanelListaErrores.setName(""); // NOI18N

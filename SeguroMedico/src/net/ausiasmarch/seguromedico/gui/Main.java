@@ -194,7 +194,7 @@ public class Main extends javax.swing.JFrame {
         jTextAreaListaErrores.setName(""); // NOI18N
         jScrollPaneErrores.setViewportView(jTextAreaListaErrores);
 
-        getContentPane().add(jScrollPaneErrores, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 580, 140));
+        getContentPane().add(jScrollPaneErrores, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 580, 130));
 
         jLabel11.setText("Género:");
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 70, 20));
@@ -292,6 +292,7 @@ public class Main extends javax.swing.JFrame {
         if (seguroMedido.validate() == false) {
         sb.append(seguroMedido.getMensaje());
         setSize(637, 539);
+        jScrollPaneErrores.setVisible(true);
         jTextAreaListaErrores.setText("");
         jTextAreaListaErrores.append(sb.toString());
         jTextAreaListaErrores.setCaretPosition(0);
@@ -306,8 +307,7 @@ public class Main extends javax.swing.JFrame {
         // Mostramos los resultados con el formato adecuado
         jTextFieldImporteMensual.setText(Convert.format(importeMensual, 2));
         jTextFieldImporteAnual.setText(Convert.format(importeAnual, 2));
-        
-
+        setSize(650, 370);
     }//GEN-LAST:event_jButtonCalcularActionPerformed
 
     private void jButtonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimpiarActionPerformed
