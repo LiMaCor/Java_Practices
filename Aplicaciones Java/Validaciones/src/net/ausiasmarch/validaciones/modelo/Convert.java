@@ -29,14 +29,14 @@ public class Convert {
         }
     }
     
-    /**
+    /** ^(-)?[0-9]+((,)[0-9]+)?$
      * Transforma un String a un número decimal
      * @param s
      * @return
      * @throws java.lang.Exception
      */
     public static double parseDouble(String s) throws Exception {
-        if (!s.matches("^(-)?\\d{1,3}(,)?(\\.\\d{3}((,)?))*|(\\d((,)?))+$")) {
+        if (!s.matches("^(-)?([0-9](((\\.\\d{3})*)?))+((,)[0-9]+)$|\\d+$")) {
             throw new RuntimeException("Formato numérico no válido");
         }
         
@@ -58,9 +58,10 @@ public class Convert {
     public static boolean isValidInt(String s) throws Exception {
         try {
             parseInt(s);
+            //System.out.println(s);
             return true;
         } catch (Exception ex) {
-            throw new RuntimeException("El número no es un entero");
+            throw new RuntimeException("Formato numérico no válido");
         }
     }
     
@@ -72,9 +73,10 @@ public class Convert {
     public static boolean isValidDouble(String s) throws Exception {
         try {
             parseDouble(s);
+            //System.out.println(s);
             return true;
         } catch (Exception ex) {
-            throw new RuntimeException("El número no es un decimal");
+            throw new RuntimeException("Formato numérico no válido");
         }
     }
 

@@ -90,6 +90,12 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jTextFieldValor.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextFieldValorFocusGained(evt);
+            }
+        });
+
         jLabel6.setText("Valor");
 
         javax.swing.GroupLayout jPanelNumerosLayout = new javax.swing.GroupLayout(jPanelNumeros);
@@ -228,6 +234,12 @@ public class Main extends javax.swing.JFrame {
 
         jLabel2.setText("Codigo Cuenta Cliente");
 
+        jTextFieldCCC.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextFieldCCCFocusGained(evt);
+            }
+        });
+
         jButtonValidaCCC.setText("Validar");
         jButtonValidaCCC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -352,6 +364,7 @@ public class Main extends javax.swing.JFrame {
         jTextFieldEMail.setText("");
         jTextFieldCCC.setText("");
         jTextFieldIBAN.setText("");
+        jTextFieldValor.setText("");
     }//GEN-LAST:event_jButtonLimpiarActionPerformed
 
     private void jButtonValidaEMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValidaEMailActionPerformed
@@ -366,10 +379,18 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonValidaEMailActionPerformed
 
     private void jButtonValidaCCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValidaCCCActionPerformed
-
+        String ccc = jTextFieldCCC.getText();
+        String IBAN;
         
-        
-        
+        try {
+            if (Iban.validaCCC(ccc)) {
+                jTextFieldIBAN.setText(Iban.calculaIban(ccc));
+                jTextFieldCCC.setForeground(Color.BLUE);
+            }
+        } catch (Exception ex) {
+            jTextFieldCCC.setForeground(Color.RED);
+            mensaje(ex.getMessage());
+        }
     }//GEN-LAST:event_jButtonValidaCCCActionPerformed
 
     private void jTextFieldEMailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldEMailFocusGained
@@ -378,12 +399,32 @@ public class Main extends javax.swing.JFrame {
 
     private void jButtonValidarNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValidarNumeroActionPerformed
         String Numero = jTextFieldValor.getText();
+        
         try {
-            if (!Convert.isValidInt(Numero)) {
-                mensaje(ex.getMessage());
+            if (jComboBoxTipo.getSelectedItem() == "Integer") {
+                if (Convert.isValidInt(Numero)) {
+                    Convert.format(Convert.parseInt(Numero));
+                    jTextFieldValor.setForeground(Color.BLUE);
+                }
+            } else if (jComboBoxTipo.getSelectedItem() == "Double"){
+                if (Convert.isValidDouble(Numero)) {
+                    Convert.format(Convert.parseDouble(Numero));
+                    jTextFieldValor.setForeground(Color.BLUE);
+                }
             }
+        } catch (Exception ex) {
+            jTextFieldValor.setForeground(Color.RED);
+            mensaje(ex.getMessage());
         }
     }//GEN-LAST:event_jButtonValidarNumeroActionPerformed
+
+    private void jTextFieldValorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldValorFocusGained
+        jTextFieldValor.setForeground(Color.BLACK);
+    }//GEN-LAST:event_jTextFieldValorFocusGained
+
+    private void jTextFieldCCCFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldCCCFocusGained
+    jTextFieldCCC.setForeground(Color.BLACK);
+    }//GEN-LAST:event_jTextFieldCCCFocusGained
 
     /**
      * @param args the command line arguments

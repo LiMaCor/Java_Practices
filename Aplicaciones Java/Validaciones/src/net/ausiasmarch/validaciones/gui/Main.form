@@ -184,6 +184,9 @@
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextFieldValor">
+                  <Events>
+                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldValorFocusGained"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel6">
                   <Properties>
@@ -393,6 +396,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextFieldCCC">
+                  <Events>
+                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldCCCFocusGained"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButtonValidaCCC">
                   <Properties>
